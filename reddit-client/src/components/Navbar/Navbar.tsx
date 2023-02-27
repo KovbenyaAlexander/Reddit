@@ -1,10 +1,18 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 
 const Navbar: React.FC = () => {
   return (
+    // @ts-ignore
     <Flex bg="white" height="44px" padding="6px 12px">
-      <Flex>Logos</Flex>
+      <Flex align="center">
+        <Image src="/images/logoFace.svg" height="30px" />
+        <Image
+          src="/images/logoText.svg"
+          height="46px"
+          display={{ base: "none", md: "unset" }}
+        />
+      </Flex>
     </Flex>
   );
 };
