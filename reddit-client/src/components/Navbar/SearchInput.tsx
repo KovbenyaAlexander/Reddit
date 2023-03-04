@@ -16,6 +16,7 @@ const SearchInput: React.FC<SearchInputProps> = () => {
         <Input
           fontSize="10pt"
           placeholder="Search"
+          fontFamily="Open Sans"
           _placeholder={{ colot: "gray.500" }}
           _hover={{
             bg: "white",

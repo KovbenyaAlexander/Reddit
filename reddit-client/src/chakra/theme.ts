@@ -9,7 +9,7 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    body: "Open Sans, sans-serif",
+    body: "Open Sans",
   },
   styles: {
     global: () => ({
