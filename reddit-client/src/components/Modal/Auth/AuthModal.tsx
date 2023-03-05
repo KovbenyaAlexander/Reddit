@@ -12,9 +12,20 @@ import {
 import { useRecoilState } from "recoil";
 import AuthInputs from "./AuthInputs";
 import OAuthButtons from "./OAuthButtons";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../firebase/clientApp";
+import { useEffect } from "react";
 
 const AuthModal: React.FC = () => {
   const [modalState, setModalState] = useRecoilState(AuthModalState);
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    setModalState((prev) => ({
+      ...prev,
+      open: false,
+    }));
+  }, [user]);
 
   const onCloseClickHandler = () => {
     setModalState((prev) => ({
@@ -22,6 +33,7 @@ const AuthModal: React.FC = () => {
       open: false,
     }));
   };
+
   return (
     <>
       <Modal isOpen={modalState.open} onClose={onCloseClickHandler}>
