@@ -5,6 +5,7 @@ import AuthModal from "@/components/Modal/Auth/AuthModal";
 import { auth } from "../../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
+import Icons from "./Icons";
 
 type RightContentProps = {};
 
@@ -17,17 +18,7 @@ const RightContent: React.FC<RightContentProps> = () => {
       {/* @ts-ignore*/}
       <Flex justify="center" align="center"></Flex>
 
-      {user ? (
-        <Button
-          onClick={() => {
-            signOut(auth);
-          }}
-        >
-          signout
-        </Button>
-      ) : (
-        <AuthButtons />
-      )}
+      {user ? <Icons /> : <AuthButtons />}
     </>
   );
 };
