@@ -11,6 +11,7 @@ import {
   Button,
   Icon,
   Flex,
+  Text,
 } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../firebase/clientApp";
@@ -42,6 +43,18 @@ const UserMenu: React.FC<UserMynuProps> = () => {
           {user ? (
             <Flex align="center">
               <Icon as={FaRedditSquare} fontSize="24" mr="1" color="gray.300" />
+              <Flex
+                direction="column"
+                fontSize="8pt"
+                display={{ base: "none", lg: "flex" }}
+              >
+                <Text>{user?.displayName || user?.email}</Text>
+                <Flex align="center">
+                  <Icon as={IoSparkles} color="brand.100" mr="1" />
+                  <Text>12 karma</Text>
+                </Flex>
+              </Flex>
+
               <ChevronDownIcon />
             </Flex>
           ) : (
