@@ -48,10 +48,10 @@ const UserMenu: React.FC<UserMynuProps> = () => {
                 fontSize="8pt"
                 display={{ base: "none", lg: "flex" }}
               >
-                <Text>{user?.displayName || user?.email}</Text>
+                <Text fontWeight="700">{user?.displayName || user?.email}</Text>
                 <Flex align="center">
                   <Icon as={IoSparkles} color="brand.100" mr="1" />
-                  <Text>12 karma</Text>
+                  <Text color="gray.400">12 karma</Text>
                 </Flex>
               </Flex>
 
