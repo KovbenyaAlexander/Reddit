@@ -12,7 +12,7 @@ const SignUp: React.FC<SignUpProps> = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
-  const [validationError, setBalidationError] = useState("");
+  const [validationError, setValidationError] = useState("");
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -22,10 +22,10 @@ const SignUp: React.FC<SignUpProps> = () => {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      return setBalidationError("Passwords don't match");
+      return setValidationError("Passwords don't match");
     }
 
-    setBalidationError("");
+    setValidationError("");
     createUserWithEmailAndPassword(email, password);
   };
 
