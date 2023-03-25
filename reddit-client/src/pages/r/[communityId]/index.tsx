@@ -6,6 +6,7 @@ import { ICommunity } from "@/atoms/communitiesAtom";
 import safeJsonStringify from "safe-json-stringify";
 import NotFound from "@/components/Community/NotFound";
 import Header from "@/components/Community/Header";
+import PageContent from "@/components/Layout/PageContent";
 
 type CommunityPageProps = {
   communityData: ICommunity;
@@ -19,6 +20,14 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   return (
     <>
       <Header communityData={communityData} />
+      <PageContent>
+        <>
+          <div>l</div>
+        </>
+        <>
+          <div>r</div>
+        </>
+      </PageContent>
     </>
   );
 };
