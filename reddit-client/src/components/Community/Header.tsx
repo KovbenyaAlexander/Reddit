@@ -9,7 +9,8 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
-  const { communityStateValue, toggleJoinCommynity } = useCommunityData();
+  const { communityStateValue, toggleJoinCommynity, isLoading } =
+    useCommunityData();
 
   const isJoined = !!communityStateValue.mySnippets.find(
     (item) => item.communityId === communityData.id
@@ -51,6 +52,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 pl="6"
                 variant={isJoined ? "outline" : "solid"}
                 textAlign="center"
+                isLoading={isLoading}
                 onClick={() => toggleJoinCommynity(communityData, isJoined)}
               >
                 {isJoined ? "Joined" : "Join"}

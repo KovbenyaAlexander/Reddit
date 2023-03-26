@@ -22,14 +22,22 @@ import { CgProfile } from "react-icons/cg";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { MdOutlineLogin } from "react-icons/md";
 import { signOut } from "firebase/auth";
-import { useSetRecoilState } from "recoil";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { AuthModalState } from "@/atoms/authModalAtom";
+import { CommunityState } from "@/atoms/communitiesAtom";
 
 type UserMynuProps = {};
 
 const UserMenu: React.FC<UserMynuProps> = () => {
   const [user] = useAuthState(auth);
   const setModalState = useSetRecoilState(AuthModalState);
+
+  const resetCommunityState = useResetRecoilState(CommunityState);
+
+  const logout = async () => {
+    signOut(auth);
+    resetCommunityState();
+  };
 
   return (
     <>
@@ -81,9 +89,7 @@ const UserMenu: React.FC<UserMynuProps> = () => {
                 fontSize="10pt"
                 fontWeight="700"
                 _hover={{ bg: "blue.500", color: "white" }}
-                onClick={() => {
-                  signOut(auth);
-                }}
+                onClick={logout}
               >
                 <Flex align="center">
                   <Icon as={MdOutlineLogin} fontSize="20" mr="2" />
