@@ -49,7 +49,12 @@ const TextInputs: React.FC<TextInputsProps> = ({
           }}
         />
         <Flex justify="flex-end">
-          <Button height="34px" padding="0px 30px" isLoading={isLoading}>
+          <Button
+            height="34px"
+            padding="0px 30px"
+            isLoading={isLoading}
+            disabled={!title}
+          >
             Post
           </Button>
         </Flex>

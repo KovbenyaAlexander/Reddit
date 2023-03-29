@@ -6,6 +6,7 @@ import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import Tab from "./Tab";
 import TextInputs from "./PostForm/TextInputs";
+import ImageUpload from "./PostForm/ImageUpload";
 
 type newPostFormProps = {};
 
@@ -36,11 +37,24 @@ const NewPostForm: React.FC<newPostFormProps> = () => {
   const [selectedTab, setSelectedTab] = useState(tabs[0].title);
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
-  const [selectedFile, setSelectedFile] = useState<string>();
+  const [selectedFile, setSelectedFile] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
+  console.log(selectedFile);
   const handleCreatePost = async () => {};
-  const onSelectImage = () => {};
-  const onTextChange = () => {};
+
+  const onSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+    if (e.target.files?.[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    reader.onload = (readerEvent) => {
+      if (readerEvent.target?.result) {
+        setSelectedFile(readerEvent.target.result as string);
+      }
+    };
+  };
 
   return (
     <>
@@ -66,7 +80,15 @@ const NewPostForm: React.FC<newPostFormProps> = () => {
               setTitle={setTitle}
               postText={postText}
               setPostText={setPostText}
-              isLoading={false}
+              isLoading={isLoading}
+            />
+          )}
+          {selectedTab === "Images & Vedeo" && (
+            <ImageUpload
+              onSelectImage={onSelectImage}
+              setSelectedTab={setSelectedTab}
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
             />
           )}
         </Flex>
