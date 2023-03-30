@@ -7,6 +7,7 @@ type TextInputsProps = {
   postText: string;
   setPostText: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
+  handleCreatePost: () => void;
 };
 
 const TextInputs: React.FC<TextInputsProps> = ({
@@ -15,6 +16,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
   setTitle,
   title,
   isLoading,
+  handleCreatePost,
 }) => {
   return (
     <>
@@ -54,6 +56,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
             padding="0px 30px"
             isLoading={isLoading}
             disabled={!title}
+            onClick={handleCreatePost}
           >
             Post
           </Button>
