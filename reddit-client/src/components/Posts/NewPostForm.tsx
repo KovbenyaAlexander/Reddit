@@ -1,4 +1,10 @@
-import { Flex } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Flex,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 
 import { BiPoll } from "react-icons/bi";
@@ -53,6 +59,7 @@ const NewPostForm: React.FC<newPostFormProps> = ({ user }) => {
   const [postText, setPostText] = useState("");
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const router = useRouter();
 
@@ -81,6 +88,7 @@ const NewPostForm: React.FC<newPostFormProps> = ({ user }) => {
       }
     } catch (e) {
       console.log(e);
+      setIsError(true);
     }
     setIsLoading(false);
 
@@ -137,6 +145,12 @@ const NewPostForm: React.FC<newPostFormProps> = ({ user }) => {
             />
           )}
         </Flex>
+        {isError && (
+          <Alert status="error">
+            <AlertIcon />
+            <AlertDescription>Error creating post</AlertDescription>
+          </Alert>
+        )}
       </Flex>
     </>
   );
