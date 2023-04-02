@@ -16,12 +16,12 @@ export interface IPost {
 }
 
 interface PostState {
-  selectePost: IPost | null;
+  selectedPost: IPost | null;
   posts: IPost[];
 }
 
 const DefaultPostState: PostState = {
-  selectePost: null,
+  selectedPost: null,
   posts: [],
 };
 
