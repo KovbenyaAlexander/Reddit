@@ -1,7 +1,7 @@
 import { IPost } from "@/atoms/postsAtom";
-import { Flex, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import { Flex, Icon, Image, Skeleton, Stack, Text } from "@chakra-ui/react";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 import {
@@ -30,6 +30,8 @@ const PostItem: React.FC<PostItemProps> = ({
   userIsCreator,
   userVoteValue,
 }) => {
+  const [isLoadingImg, setIsLoadingImg] = useState(true);
+  console.log(`isLoading - ${isLoadingImg}`);
   return (
     <>
       {/* @ts-ignore*/}
@@ -93,7 +95,17 @@ const PostItem: React.FC<PostItemProps> = ({
 
           {post.imageURL && (
             <Flex justify="center" align="center">
-              <Image src={post.imageURL} maxHeight="460px" alt="img" />
+              {isLoadingImg && (
+                <Skeleton height="200px" width="100%" borderRadius="4" />
+              )}
+
+              <Image
+                src={post.imageURL}
+                maxHeight="460px"
+                alt="img"
+                display={isLoadingImg ? "none" : "block"}
+                onLoad={() => setIsLoadingImg(false)}
+              />
             </Flex>
           )}
           <Flex ml="1" mb="0.5" color="gray.500" fontWeight="600">

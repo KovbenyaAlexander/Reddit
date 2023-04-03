@@ -7,6 +7,7 @@ import { IPost } from "@/atoms/postsAtom";
 import PostItem from "./PostItem";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Stack } from "@chakra-ui/react";
+import PostLoader from "./PostLoader";
 
 type PostsProps = {
   communityData: ICommunity;
@@ -15,6 +16,7 @@ type PostsProps = {
 const Posts: React.FC<PostsProps> = ({ communityData }) => {
   const [user] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     postStateValue,
     setPostStateValue,
@@ -25,6 +27,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
 
   const getPosts = async () => {
     try {
+      setIsLoading(true);
       const postQuery = query(
         collection(firestore, "posts"),
         where("communityId", "==", communityData.id),
@@ -40,6 +43,8 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
     } catch (error) {
       console.log(`fetching posts error`);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -48,19 +53,25 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
   }, []);
 
   return (
-    <Stack>
-      {postStateValue.posts.map((item) => (
-        <PostItem
-          onDeletePost={onDeletePost}
-          onSelectPost={onSelectPost}
-          onVote={onVote}
-          key={item.id}
-          userIsCreator={user?.uid === item.creatorId}
-          post={item}
-          userVoteValue={undefined}
-        />
-      ))}
-    </Stack>
+    <>
+      {isLoading ? (
+        <PostLoader />
+      ) : (
+        <Stack>
+          {postStateValue.posts.map((item) => (
+            <PostItem
+              onDeletePost={onDeletePost}
+              onSelectPost={onSelectPost}
+              onVote={onVote}
+              key={item.id}
+              userIsCreator={user?.uid === item.creatorId}
+              post={item}
+              userVoteValue={undefined}
+            />
+          ))}
+        </Stack>
+      )}
+    </>
   );
 };
 export default Posts;
