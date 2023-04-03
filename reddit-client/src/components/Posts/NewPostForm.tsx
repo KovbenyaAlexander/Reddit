@@ -86,13 +86,12 @@ const NewPostForm: React.FC<newPostFormProps> = ({ user }) => {
 
         await updateDoc(postDocRef, { imageURL: downloadUrl });
       }
+      router.back();
     } catch (e) {
       console.log(e);
       setIsError(true);
     }
     setIsLoading(false);
-
-    // router.back();
   };
 
   const onSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
