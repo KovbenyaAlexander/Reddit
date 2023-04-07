@@ -57,19 +57,22 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
       {isLoading ? (
         <PostLoader />
       ) : (
-        <Stack>
-          {postStateValue.posts.map((item) => (
-            <PostItem
-              onDeletePost={onDeletePost}
-              onSelectPost={onSelectPost}
-              onVote={onVote}
-              key={item.id}
-              userIsCreator={user?.uid === item.creatorId}
-              post={item}
-              userVoteValue={undefined}
-            />
-          ))}
-        </Stack>
+        <>
+          {/* @ts-ignore*/}
+          <Stack mt="4">
+            {postStateValue.posts.map((item) => (
+              <PostItem
+                onDeletePost={onDeletePost}
+                onSelectPost={onSelectPost}
+                onVote={onVote}
+                key={item.id}
+                userIsCreator={user?.uid === item.creatorId}
+                post={item}
+                userVoteValue={undefined}
+              />
+            ))}
+          </Stack>
+        </>
       )}
     </>
   );
