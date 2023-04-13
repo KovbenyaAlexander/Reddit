@@ -52,6 +52,8 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
     getPosts();
   }, []);
 
+  console.log();
+
   return (
     <>
       {isLoading ? (
@@ -70,7 +72,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
                 post={item}
                 userVoteValue={
                   postStateValue.postVotes.find(
-                    (item) => item.postId === item.id
+                    (vote) => vote.postId === item.id
                   )?.voteValue
                 }
               />
