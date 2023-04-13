@@ -16,7 +16,7 @@ const usePosts = () => {
     try {
       const { voteStatus } = post;
       const existingVote = postStateValue.postVotes.find(
-        (item) => item.id === post.id
+        (item) => item.postId === post.id
       );
 
       const batch = writeBatch(firestore);
@@ -56,8 +56,8 @@ const usePosts = () => {
 
           voteChange *= -1;
         } else {
-          voteChange *= 2;
-          updatedPost.voteStatus = voteStatus + 2 + vote;
+          voteChange = 2 * vote;
+          updatedPost.voteStatus = voteStatus + 2 * vote;
 
           const voteIdx = postStateValue.postVotes.findIndex(
             (item) => item.id === existingVote.id
