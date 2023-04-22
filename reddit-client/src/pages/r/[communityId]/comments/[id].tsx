@@ -1,6 +1,7 @@
 import { IPost } from "@/atoms/postsAtom";
 import About from "@/components/Community/About";
 import PageContent from "@/components/Layout/PageContent";
+import Comments from "@/components/Posts/Comments/Comments";
 import PostItem from "@/components/Posts/PostItem";
 import usePosts from "@/components/Posts/usePosts";
 import { auth, firestore } from "@/firebase/clientApp";
@@ -57,6 +58,17 @@ const PostPage: React.FC = () => {
             userIsCreator={user?.uid === postStateValue.selectedPost?.creatorId}
           />
         )}
+        {user &&
+          communityStateValue.currentCommunity &&
+          postStateValue.selectedPost &&
+          communityStateValue.currentCommunity && (
+            <Comments
+              user={user}
+              communityId={communityStateValue.currentCommunity.id}
+              selectedPost={postStateValue.selectedPost}
+              key={postStateValue.selectedPost?.id}
+            />
+          )}
       </>
       <>
         {communityStateValue.currentCommunity && (
