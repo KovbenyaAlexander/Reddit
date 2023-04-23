@@ -58,8 +58,7 @@ const PostPage: React.FC = () => {
             userIsCreator={user?.uid === postStateValue.selectedPost?.creatorId}
           />
         )}
-        {user &&
-          communityStateValue.currentCommunity &&
+        {communityStateValue.currentCommunity &&
           postStateValue.selectedPost &&
           communityStateValue.currentCommunity && (
             <Comments

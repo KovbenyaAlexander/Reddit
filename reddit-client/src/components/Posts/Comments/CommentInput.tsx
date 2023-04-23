@@ -21,49 +21,45 @@ const CommentInput: React.FC<CommentInputProps> = ({
     <>
       {/* @ts-ignore*/}
       <Flex direction="column">
-        {user ? (
-          <>
-            <Text mb="1">
-              Comment as{" "}
-              <span style={{ color: "#3182CE" }}>
-                {user.email?.split("@")[0]}
-              </span>
-            </Text>
+        <>
+          <Text mb="1">
+            Comment as{" "}
+            <span style={{ color: "#3182CE" }}>
+              {user.email?.split("@")[0]}
+            </span>
+          </Text>
 
-            <Textarea
-              width="100%"
-              height="100px"
-              onChange={(e) => setCommentText(e.target.value)}
-              value={commentText}
-              placeholder="Add a comment..."
-              fontSize="10pt"
-              minHeight="160px"
-              pb="10"
-              _focus={{
-                outline: "none",
-                bg: "white",
-                border: "1px solid black",
-              }}
-            ></Textarea>
-            <Flex
-              justify="flex-end"
-              bg="gray.100"
-              p="6px 8px"
-              borderRadius="0px 0px 4px 4px"
+          <Textarea
+            width="100%"
+            height="100px"
+            onChange={(e) => setCommentText(e.target.value)}
+            value={commentText}
+            placeholder="Add a comment..."
+            fontSize="10pt"
+            minHeight="160px"
+            pb="10"
+            _focus={{
+              outline: "none",
+              bg: "white",
+              border: "1px solid black",
+            }}
+          ></Textarea>
+          <Flex
+            justify="flex-end"
+            bg="gray.100"
+            p="6px 8px"
+            borderRadius="0px 0px 4px 4px"
+          >
+            <Button
+              height="28px"
+              isLoading={createLoading}
+              isDisabled={!commentText.trim()}
+              onClick={(e) => onCreateComment(commentText)}
             >
-              <Button
-                height="28px"
-                isLoading={createLoading}
-                disabled={!commentText}
-                onClick={(e) => onCreateComment(commentText)}
-              >
-                Comment
-              </Button>
-            </Flex>
-          </>
-        ) : (
-          <></>
-        )}
+              Comment
+            </Button>
+          </Flex>
+        </>
       </Flex>
     </>
   );
