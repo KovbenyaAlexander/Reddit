@@ -12,7 +12,9 @@ type CommunityProps = {};
 const Communities: React.FC<CommunityProps> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const mySnippets = useRecoilValue(CommunityState).mySnippets;
+  const mySnippets1 = useRecoilValue(CommunityState);
 
+  console.log(mySnippets1);
   return (
     <>
       <CreateCommunityModal
@@ -22,6 +24,24 @@ const Communities: React.FC<CommunityProps> = () => {
         }}
       />
       {/* @ts-ignore*/}
+      <Box mt="3" mb="4">
+        <Text pl="3" mb="1" fontSize="9pt" fontWeight="700" color="gray.500">
+          MODERATING
+        </Text>
+      </Box>
+      {/* @ts-ignore*/}
+      {mySnippets
+        .filter((snippet) => snippet.isModerator)
+        .map((snippet) => (
+          <MenuListItem
+            icon={FaReddit}
+            linkToCommunity={`/r/${snippet.communityId}`}
+            key={snippet.communityId}
+            text={`/r/${snippet.communityId}`}
+            imageURL={snippet.imageUrl}
+          />
+        ))}
+      {/*------------*/}
       <Box mt="3" mb="4">
         <Text pl="3" mb="1" fontSize="9pt" fontWeight="700" color="gray.500">
           MY COMMUNITIES
