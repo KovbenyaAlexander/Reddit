@@ -1,4 +1,12 @@
-import { Flex, Icon, Menu, MenuButton, MenuList, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  Image,
+  Menu,
+  MenuButton,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { TiHome } from "react-icons/ti";
@@ -7,6 +15,7 @@ import useDirectory from "@/hooks/useDirectory";
 
 const Directory: React.FC = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
+
   return (
     <>
       <Menu isOpen={directoryState.isOpen}>
@@ -26,10 +35,19 @@ const Directory: React.FC = () => {
             justify="space-between"
           >
             <Flex align="center">
-              <Icon fontSize="24" as={TiHome} />
+              {directoryState.selectedMenuItem.imageURL ? (
+                <Image
+                  src={directoryState.selectedMenuItem.imageURL}
+                  borderRadius="full"
+                  boxSize="24px"
+                />
+              ) : (
+                <Icon fontSize="24" as={directoryState.selectedMenuItem.icon} />
+              )}
+
               <Flex display={{ base: "none", lg: "flex" }}>
                 <Text fontWeight="600" fontSize="10pt" ml="2">
-                  Home
+                  {directoryState.selectedMenuItem.text}
                 </Text>
               </Flex>
             </Flex>
