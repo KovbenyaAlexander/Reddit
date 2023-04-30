@@ -14,7 +14,7 @@ export interface IDirectoryMenu {
   selectedMenuItem: IDirectoryMenuItem;
 }
 
-export const directoryMenuItem: IDirectoryMenuItem = {
+export const DefaultdirectoryMenuItem: IDirectoryMenuItem = {
   icon: TiHome,
   linkToCommunity: "/",
   text: "Home",
@@ -22,7 +22,7 @@ export const directoryMenuItem: IDirectoryMenuItem = {
 
 export const defaultMenuState = {
   isOpen: false,
-  selectedMenuItem: directoryMenuItem,
+  selectedMenuItem: DefaultdirectoryMenuItem,
 };
 
 export const directoryMenuAtom = atom<IDirectoryMenu>({
