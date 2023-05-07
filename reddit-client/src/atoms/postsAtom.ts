@@ -11,7 +11,7 @@ export interface IPost {
   numberOfComments: number;
   voteStatus: number;
   imageURL?: string;
-  communityImageURL?: string;
+  communityImageUrl?: string;
   createdAt: Timestamp;
 }
 

@@ -52,6 +52,7 @@ const PostItem: React.FC<PostItemProps> = ({
   userVoteValue,
   isHomePage,
 }) => {
+  console.log(post);
   const [isLoadingImg, setIsLoadingImg] = useState(true);
   const [error, setError] = useState("");
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -134,9 +135,9 @@ const PostItem: React.FC<PostItemProps> = ({
             <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
               {isHomePage && (
                 <>
-                  {post.communityImageURL ? (
+                  {post.communityImageUrl ? (
                     <Image
-                      src={post.communityImageURL}
+                      src={post.communityImageUrl}
                       borderRadius="full"
                       boxSize="18px"
                       mr="2"
@@ -157,7 +158,6 @@ const PostItem: React.FC<PostItemProps> = ({
                       onClick={(e) => e.stopPropagation()}
                     >{`r/${post.communityId}`}</Text>
                   </Link>
-
                   <Icon as={BsDot} color="gray.400" fontSize="8" />
                 </>
               )}
