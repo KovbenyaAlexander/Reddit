@@ -1,6 +1,5 @@
 import { Alert, AlertDescription, AlertIcon, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
-
 import { firestore, storage } from "@/firebase/clientApp";
 import useSelectFile from "@/hooks/useSelectFile";
 import { Timestamp } from "@google-cloud/firestore";
@@ -22,6 +21,7 @@ import Tab from "./Tab";
 
 type newPostFormProps = {
   user: User;
+  communityImageUrl?: string;
 };
 
 const tabs = [
@@ -47,7 +47,10 @@ const tabs = [
   },
 ];
 
-const NewPostForm: React.FC<newPostFormProps> = ({ user }) => {
+const NewPostForm: React.FC<newPostFormProps> = ({
+  user,
+  communityImageUrl,
+}) => {
   const [selectedTab, setSelectedTab] = useState(tabs[0].title);
   const { onSelectFile, selectedFile, setSelectedFile } = useSelectFile();
   const [title, setTitle] = useState("");
@@ -68,6 +71,7 @@ const NewPostForm: React.FC<newPostFormProps> = ({ user }) => {
       numberOfComments: 0,
       voteStatus: 0,
       createdAt: serverTimestamp() as Timestamp,
+      communityImageUrl: communityImageUrl || "",
     };
 
     setIsLoading(true);

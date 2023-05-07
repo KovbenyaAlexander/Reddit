@@ -8,18 +8,24 @@ import { auth } from "@/firebase/clientApp";
 import { useSetRecoilState } from "recoil";
 import { AuthModalState } from "@/atoms/authModalAtom";
 import { useRouter } from "next/router";
+import useDirectory from "@/hooks/useDirectory";
 
 const CreatePostLink: React.FC = () => {
   const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(AuthModalState);
   const router = useRouter();
+  const { toggleMenuOpen } = useDirectory();
 
   const onInputClickHandler = () => {
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
     } else {
       const { communityId } = router.query;
-      router.push(`/r/${communityId}/submit`);
+      if (communityId) {
+        router.push(`/r/${communityId}/submit`);
+      } else {
+        toggleMenuOpen();
+      }
     }
   };
 
