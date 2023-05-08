@@ -1,6 +1,7 @@
 import { CommunityState } from "@/atoms/communitiesAtom";
 import { IPost, IPostVote } from "@/atoms/postsAtom";
 import CreatePostLink from "@/components/Community/CreatePostLink";
+import Recommendations from "@/components/Community/Recommendations";
 import PageContent from "@/components/Layout/PageContent";
 import PostItem from "@/components/Posts/PostItem";
 import PostLoader from "@/components/Posts/PostLoader";
@@ -47,9 +48,6 @@ export default function Home() {
         id: doc.id,
         ...doc.data(),
       }));
-
-      console.log(`no user posts:`);
-      console.log(posts);
 
       setPostStateValue((prev) => ({
         ...prev,
@@ -175,7 +173,7 @@ export default function Home() {
           </>
         )}
       </>
-      <>dd</>
+      <Recommendations />
     </PageContent>
   );
 }

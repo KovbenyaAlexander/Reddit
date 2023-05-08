@@ -14,7 +14,6 @@ const Communities: React.FC<CommunityProps> = () => {
   const mySnippets = useRecoilValue(CommunityState).mySnippets;
   const mySnippets1 = useRecoilValue(CommunityState);
 
-  console.log(mySnippets1);
   return (
     <>
       <CreateCommunityModal

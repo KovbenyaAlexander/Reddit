@@ -52,7 +52,6 @@ const PostItem: React.FC<PostItemProps> = ({
   userVoteValue,
   isHomePage,
 }) => {
-  console.log(post);
   const [isLoadingImg, setIsLoadingImg] = useState(true);
   const [error, setError] = useState("");
   const [loadingDelete, setLoadingDelete] = useState(false);
