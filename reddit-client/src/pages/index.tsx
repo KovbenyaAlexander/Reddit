@@ -1,5 +1,5 @@
 import { CommunityState } from "@/atoms/communitiesAtom";
-import { IPost } from "@/atoms/postsAtom";
+import { IPost, IPostVote } from "@/atoms/postsAtom";
 import CreatePostLink from "@/components/Community/CreatePostLink";
 import PageContent from "@/components/Layout/PageContent";
 import PostItem from "@/components/Posts/PostItem";
@@ -97,7 +97,28 @@ export default function Home() {
     setLoading(false);
   };
 
-  const getUserPostVotes = () => {};
+  const getUserPostVotes = async () => {
+    try {
+      const postIds = postStateValue.posts.map((post) => post.id);
+      const postVotesQuery = query(
+        collection(firestore, `users/${user?.uid}/postVotes`),
+        where("postId", "in", postIds)
+      );
+
+      const postVoteDocs = await getDocs(postVotesQuery);
+      const postVotes = postVoteDocs.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: postVotes as IPostVote[],
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!user && !loadingUser) {
@@ -110,6 +131,19 @@ export default function Home() {
       buildUserHomeFeed();
     }
   }, [communityStateValue.isSnippetsFetched]);
+
+  useEffect(() => {
+    if (user && postStateValue.posts.length) {
+      getUserPostVotes();
+    }
+
+    return () => {
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: [],
+      }));
+    };
+  }, [user, postStateValue.posts]);
 
   return (
     <PageContent>
