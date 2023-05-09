@@ -1,6 +1,7 @@
 import { CommunityState } from "@/atoms/communitiesAtom";
 import { IPost, IPostVote } from "@/atoms/postsAtom";
 import CreatePostLink from "@/components/Community/CreatePostLink";
+import Premiun from "@/components/Community/Premiun";
 import Recommendations from "@/components/Community/Recommendations";
 import PageContent from "@/components/Layout/PageContent";
 import PostItem from "@/components/Posts/PostItem";
@@ -173,7 +174,10 @@ export default function Home() {
           </>
         )}
       </>
-      <Recommendations />
+      <Stack spacing="5">
+        <Recommendations />
+        <Premiun />
+      </Stack>
     </PageContent>
   );
 }
