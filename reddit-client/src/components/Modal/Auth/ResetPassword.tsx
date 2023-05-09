@@ -38,7 +38,7 @@ const ResetPassword: React.FC = () => {
           ) : (
             <>
               <Text textAlign="center" mt="2">
-                Enter the email with your account and we'll send you a reset
+                Enter the email with your account and we will send you a reset
                 link
               </Text>
               <form onSubmit={formSubmitHandler}>
