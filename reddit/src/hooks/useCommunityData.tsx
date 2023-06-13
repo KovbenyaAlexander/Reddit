@@ -29,7 +29,7 @@ const useCommunityData = () => {
     useRecoilState(CommunityState);
   const router = useRouter();
 
-  const toggleJoinCommynity = (
+  const toggleJoinCommunity = (
     communityData: ICommunity,
     isJoined: boolean
   ) => {
@@ -42,13 +42,13 @@ const useCommunityData = () => {
     }
 
     if (isJoined) {
-      leaveComminity(communityData.id);
+      leaveCommunity(communityData.id);
     } else {
-      joinComminity(communityData);
+      joinCommunity(communityData);
     }
   };
 
-  const joinComminity = async (communityData: ICommunity) => {
+  const joinCommunity = async (communityData: ICommunity) => {
     try {
       const batch = writeBatch(firestore);
 
@@ -85,7 +85,7 @@ const useCommunityData = () => {
     }
   };
 
-  const leaveComminity = async (communityId: string) => {
+  const leaveCommunity = async (communityId: string) => {
     try {
       const batch = writeBatch(firestore);
       batch.delete(
@@ -170,7 +170,7 @@ const useCommunityData = () => {
 
   return {
     communityStateValue,
-    toggleJoinCommynity,
+    toggleJoinCommunity,
     isLoading,
   };
 };

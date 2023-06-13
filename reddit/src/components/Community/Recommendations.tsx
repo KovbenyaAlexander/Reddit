@@ -10,7 +10,7 @@ import { FaReddit } from "react-icons/fa";
 const Recommendations: React.FC = () => {
   const [communities, setCommunities] = useState<ICommunity[]>([]);
   const [loading, setLoading] = useState(false);
-  const { communityStateValue, toggleJoinCommynity } = useCommunityData();
+  const { communityStateValue, toggleJoinCommunity } = useCommunityData();
 
   const getCommunityRecomendations = async () => {
     setLoading(true);
@@ -72,63 +72,64 @@ const Recommendations: React.FC = () => {
                 );
 
                 return (
-                  <Link key={community.id} href={`/r/${community.id}`}>
-                    <Flex
-                      align="center"
-                      fontSize="10px"
-                      borderBottom="1px solid"
-                      borderColor="gray.200"
-                      p="10px 12px"
-                      position={"relative"}
-                    >
-                      <Flex width="80%" align="center">
-                        <Flex width="15%">
-                          <Text>{index + 1}</Text>
-                        </Flex>
-                        {/* @ts-ignore*/}
-                        <Flex align="center" width="80%">
-                          {community.imageURL ? (
-                            <Image
-                              src={community.imageURL}
-                              borderRadius="full"
-                              boxSize="28px"
-                              mr="2"
-                            />
-                          ) : (
-                            <Icon
-                              as={FaReddit}
-                              fontSize="30"
-                              color="brand.100"
-                              mr="2"
-                            />
-                          )}
-                          <span
-                            style={{
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                            }}
-                          >
-                            {community.id}
-                          </span>
-                        </Flex>
+                  // <Link key={community.id} href={`/r/${community.id}`}>
+                  <Flex
+                    key={community.id}
+                    align="center"
+                    fontSize="10px"
+                    borderBottom="1px solid"
+                    borderColor="gray.200"
+                    p="10px 12px"
+                    position={"relative"}
+                  >
+                    <Flex width="80%" align="center">
+                      <Flex width="15%">
+                        <Text>{index + 1}</Text>
                       </Flex>
-
-                      <Box position="absolute" right="10px">
-                        <Button
-                          height="22px"
-                          fontSize="8pt"
-                          variant={isJoined ? "outline" : "solid"}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleJoinCommynity(community, isJoined);
+                      {/* @ts-ignore*/}
+                      <Flex align="center" width="80%">
+                        {community.imageURL ? (
+                          <Image
+                            src={community.imageURL}
+                            borderRadius="full"
+                            boxSize="28px"
+                            mr="2"
+                          />
+                        ) : (
+                          <Icon
+                            as={FaReddit}
+                            fontSize="30"
+                            color="brand.100"
+                            mr="2"
+                          />
+                        )}
+                        <span
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
                           }}
                         >
-                          {isJoined ? "Joined" : "Join"}
-                        </Button>
-                      </Box>
+                          {community.id}
+                        </span>
+                      </Flex>
                     </Flex>
-                  </Link>
+
+                    <Box position="absolute" right="10px">
+                      <Button
+                        height="22px"
+                        fontSize="8pt"
+                        variant={isJoined ? "outline" : "solid"}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleJoinCommunity(community, isJoined);
+                        }}
+                      >
+                        {isJoined ? "Joined" : "Join"}
+                      </Button>
+                    </Box>
+                  </Flex>
+                  // </Link>
                 );
               })}
 
