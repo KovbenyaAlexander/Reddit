@@ -1,7 +1,7 @@
 import { CommunityState } from "@/atoms/communitiesAtom";
 import { IPost, IPostVote } from "@/atoms/postsAtom";
 import CreatePostLink from "@/components/Community/CreatePostLink";
-import Premiun from "@/components/Community/Premiun";
+import Premiun from "@/components/Community/Premium";
 import Recommendations from "@/components/Community/Recommendations";
 import PageContent from "@/components/Layout/PageContent";
 import PostItem from "@/components/Posts/PostItem";

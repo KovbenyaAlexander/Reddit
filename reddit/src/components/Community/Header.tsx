@@ -9,14 +9,14 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
-  const { communityStateValue, toggleJoinCommynity, isLoading } =
+  const { communityStateValue, toggleJoinCommunity, isLoading } =
     useCommunityData();
 
   const isJoined = !!communityStateValue.mySnippets.find(
     (item) => item.communityId === communityData.id
   );
 
-  const toggleJoinCommynityHandler = () => {};
+  const toggleJoinCommunityHandler = () => {};
   return (
     <>
       {/* @ts-ignore*/}
@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 variant={isJoined ? "outline" : "solid"}
                 textAlign="center"
                 isLoading={isLoading}
-                onClick={() => toggleJoinCommynity(communityData, isJoined)}
+                onClick={() => toggleJoinCommunity(communityData, isJoined)}
               >
                 {isJoined ? "Joined" : "Join"}
               </Button>

@@ -2,7 +2,7 @@ import { Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { GiCheckedShield } from "react-icons/gi";
 
-const Premiun: React.FC = () => {
+const Premium: React.FC = () => {
   return (
     <>
       {/* @ts-ignore*/}
@@ -29,4 +29,4 @@ const Premiun: React.FC = () => {
     </>
   );
 };
-export default Premiun;
+export default Premium;
