@@ -1,3 +1,4 @@
+import { AuthModalState } from "@/atoms/authModalAtom";
 import { CommunityState, ICommunity } from "@/atoms/communitiesAtom";
 import { auth, firestore, storage } from "@/firebase/clientApp";
 import useSelectFile from "@/hooks/useSelectFile";
@@ -34,6 +35,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   const { onSelectFile, selectedFile, setSelectedFile } = useSelectFile();
   const [uploadingImg, setUploadingImg] = useState(false);
   const setCommunityStateValue = useSetRecoilState(CommunityState);
+  const setAuthModalState = useSetRecoilState(AuthModalState);
 
   const onUpdateImg = async () => {
     try {
@@ -56,6 +58,15 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
       console.log(e);
     }
     setUploadingImg(false);
+  };
+
+  const router = useRouter();
+  const createPostBtnHandler = (id: string) => {
+    if (user) {
+      return router.push(`/r/${id}/submit`);
+    } else {
+      setAuthModalState({ open: true, view: "login" });
+    }
   };
 
   return (
@@ -111,11 +122,15 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                 </Text>
               )}
             </Flex>
-            <Link href={`/r/${communityData.id}/submit`}>
-              <Button mt="3" height="30px">
-                Create Post
-              </Button>
-            </Link>
+
+            <Button
+              onClick={() => createPostBtnHandler(communityData.id)}
+              mt="3"
+              height="30px"
+            >
+              Create Post
+            </Button>
+
             {user?.uid === communityData.creatorId && (
               <>
                 <Divider />
