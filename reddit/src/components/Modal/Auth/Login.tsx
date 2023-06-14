@@ -9,8 +9,8 @@ import FIREBASE_ERRORS from "../../../firebase/errors";
 type LoginProps = {};
 
 const Login: React.FC<LoginProps> = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("qwe@qwe.qwe");
+  const [password, setPassword] = useState("qweqwe");
   const setAuthModalState = useSetRecoilState(AuthModalState);
 
   const [signInWithEmailAndPassword, user, loading, error] =
