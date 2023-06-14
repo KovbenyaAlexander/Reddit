@@ -9,10 +9,9 @@ const SearchInput: React.FC<SearchInputProps> = () => {
     // @ts-ignore
     <Flex mr={2} flexGrow="1" align="center">
       <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" mb="1" />}
-        />
+        <InputLeftElement pointerEvents="none">
+          <SearchIcon color="gray.300" mb="1" />
+        </InputLeftElement>
         <Input
           fontSize="10pt"
           placeholder="Search"
