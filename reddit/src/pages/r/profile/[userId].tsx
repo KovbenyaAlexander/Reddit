@@ -7,10 +7,11 @@ import { useRouter } from "next/router";
 
 type indexProps = {};
 
-const Index: React.FC<indexProps> = (props) => {
+const Profile: React.FC<indexProps> = (props) => {
   const router = useRouter();
   const { userId } = router.query;
-  console.log(userId);
+
+  if (!userId) return null;
 
   return (
     <div>
@@ -25,7 +26,7 @@ const Index: React.FC<indexProps> = (props) => {
 
         <TabPanels>
           <TabPanel>
-            <Overview />
+            <Overview userId={String(userId)} />
           </TabPanel>
           <TabPanel>
             <Posts />
@@ -41,4 +42,4 @@ const Index: React.FC<indexProps> = (props) => {
     </div>
   );
 };
-export default Index;
+export default Profile;
