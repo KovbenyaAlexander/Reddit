@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.10.6",
     "@firebase/functions": "^0.9.4",
     "@fontsource/open-sans": "^4.5.14",
+    "@google-cloud/firestore": "^6.6.1",
     "@types/node": "18.14.1",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
