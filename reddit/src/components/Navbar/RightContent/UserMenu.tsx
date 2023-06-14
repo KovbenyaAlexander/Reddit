@@ -25,6 +25,7 @@ import { signOut } from "firebase/auth";
 import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { AuthModalState } from "@/atoms/authModalAtom";
 import { CommunityState } from "@/atoms/communitiesAtom";
+import { useRouter } from "next/router";
 
 type UserMynuProps = {};
 
@@ -38,6 +39,7 @@ const UserMenu: React.FC<UserMynuProps> = () => {
     signOut(auth);
     resetCommunityState();
   };
+  const router = useRouter();
 
   return (
     <>
@@ -59,7 +61,7 @@ const UserMenu: React.FC<UserMynuProps> = () => {
                 <Text fontWeight="700">{user?.displayName || user?.email}</Text>
                 <Flex align="center">
                   <Icon as={IoSparkles} color="brand.100" mr="1" />
-                  <Text color="gray.400">12 karma</Text>
+                  <Text color="gray.400">0 karma</Text>
                 </Flex>
               </Flex>
 
@@ -76,6 +78,9 @@ const UserMenu: React.FC<UserMynuProps> = () => {
                 fontSize="10pt"
                 fontWeight="700"
                 _hover={{ bg: "blue.500", color: "white" }}
+                onClick={() => {
+                  router.push(`/r/profile/${user.uid}`);
+                }}
               >
                 <Flex align="center">
                   <Icon as={CgProfile} fontSize="20" mr="2" />
