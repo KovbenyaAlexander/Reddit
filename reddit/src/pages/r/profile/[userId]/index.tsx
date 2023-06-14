@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import Comments from "@/components/Profile/Comments";
 import Overview from "@/components/Profile/Overview";
 import Posts from "@/components/Profile/Posts";
-import Comments from "@/components/Profile/Comments";
 import Upvoted from "@/components/Profile/Upvoted";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 type indexProps = {};
 
-const index: React.FC<indexProps> = (props) => {
+const Index: React.FC<indexProps> = (props) => {
   const router = useRouter();
   const { userId } = router.query;
   console.log(userId);
@@ -41,4 +41,4 @@ const index: React.FC<indexProps> = (props) => {
     </div>
   );
 };
-export default index;
+export default Index;
