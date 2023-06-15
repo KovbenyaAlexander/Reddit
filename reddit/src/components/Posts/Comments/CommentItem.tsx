@@ -17,6 +17,7 @@ export type Comment = {
   postTitle: string;
   text: string;
   createdAt: Timestamp;
+  postAuthor: string;
 };
 
 type CommentItemProps = {

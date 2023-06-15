@@ -3,7 +3,7 @@ import { Box, Flex, Button, Text, Stack } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import CommentInput from "./CommentInput";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AuthModalState } from "@/atoms/authModalAtom";
 import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
 import {
@@ -20,6 +20,7 @@ import {
 } from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
 import CommentItem, { Comment } from "./CommentItem";
+import { CommunityState } from "../../../atoms/communitiesAtom";
 
 type CommentsProps = {
   user: User | undefined | null;
@@ -39,6 +40,7 @@ const Comments: React.FC<CommentsProps> = ({
   const setAuthModalState = useSetRecoilState(AuthModalState);
   const setPostState = useSetRecoilState(postState);
   const [loadingDeleteId, setLoadingDeleteId] = useState("");
+  const communityStateValue = useRecoilValue(CommunityState);
 
   const onCreateComment = async (comment: string) => {
     setCreateLoading(true);
@@ -55,6 +57,7 @@ const Comments: React.FC<CommentsProps> = ({
         postTitle: selectedPost.title,
         text: comment,
         createdAt: serverTimestamp() as Timestamp,
+        postAuthor: selectedPost.creatorDisplayName,
       };
 
       batch.set(commentDocRef, newComment);

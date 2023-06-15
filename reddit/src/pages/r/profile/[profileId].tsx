@@ -1,5 +1,5 @@
 import Comments from "@/components/Profile/Comments";
-import Overview from "@/components/Profile/Overview";
+import Overview from "@/components/Profile/AvatarChanger";
 import Posts from "@/components/Profile/Posts";
 import Upvoted from "@/components/Profile/Upvoted";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
@@ -7,6 +7,8 @@ import { auth, firestore, storage } from "@/firebase/clientApp";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import PageContent from "@/components/Layout/PageContent";
+import AvatarChanger from "@/components/Profile/AvatarChanger";
 
 interface IProfile {
   metadata: {
@@ -59,16 +61,29 @@ const Profile = () => {
         ) : (
           <TabPanels>
             <TabPanel>
-              <Overview profile={profile} isLoading={isLoading} />
+              <PageContent>
+                <p>last activity</p>
+                <AvatarChanger isLoading={isLoading} profile={profile} />
+              </PageContent>
+            </TabPanel>
+
+            <TabPanel>
+              <PageContent>
+                <Posts />
+                <AvatarChanger isLoading={isLoading} profile={profile} />
+              </PageContent>
             </TabPanel>
             <TabPanel>
-              <Posts />
+              <PageContent>
+                <Comments profileId={profile.uid} />
+                <AvatarChanger isLoading={isLoading} profile={profile} />
+              </PageContent>
             </TabPanel>
             <TabPanel>
-              <Comments />
-            </TabPanel>
-            <TabPanel>
-              <Upvoted />
+              <PageContent>
+                <Upvoted />
+                <AvatarChanger isLoading={isLoading} profile={profile} />
+              </PageContent>
             </TabPanel>
           </TabPanels>
         )}
