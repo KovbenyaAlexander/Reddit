@@ -63,13 +63,14 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
   const handleCreateCommunity = async () => {
     setCommunityError("");
     const format = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
-    setLoading(true);
 
     if (format.test(communityName) || communityName.length < 3) {
       return setCommunityError(
         "Community names must be between 3-21 characters, and can contain only letters and numbers of underscores"
       );
     }
+
+    setLoading(true);
 
     try {
       const communityDocRef = doc(firestore, "communities", communityName);
