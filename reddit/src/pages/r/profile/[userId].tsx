@@ -10,7 +10,6 @@ type indexProps = {};
 const Profile: React.FC<indexProps> = (props) => {
   const router = useRouter();
   const { userId } = router.query;
-
   if (!userId) return null;
 
   return (
