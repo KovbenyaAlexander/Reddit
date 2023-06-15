@@ -57,7 +57,7 @@ const Comments = ({ profileId }: { profileId: string }) => {
         ) : (
           <>
             {comments.map((comment) => (
-              <CommentItem comment={comment} />
+              <CommentItem comment={comment} key={comment.id} />
             ))}
           </>
         )}
