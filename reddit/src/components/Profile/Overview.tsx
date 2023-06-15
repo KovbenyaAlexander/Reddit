@@ -26,23 +26,18 @@ interface IProfile {
   displayName: string;
 }
 
-const Overview = ({ userId }: { userId: string }) => {
+const Overview = ({
+  profile,
+  isLoading,
+}: {
+  profile: IProfile;
+  isLoading: boolean;
+}) => {
   const [user] = useAuthState(auth);
   const selectedFileRef = useRef<HTMLInputElement>(null);
   const { onSelectFile, selectedFile } = useSelectFile();
   const [uploadingImg, setUploadingImg] = useState(false);
-  const [loadingAvatar, setLoadingAvatar] = useState(true);
   const [isAvatarUpdated, setIsAvatarUpdated] = useState(false);
-  const [profile, setProfile] = useState<undefined | IProfile>();
-
-  const fetchProfile = async () => {
-    setLoadingAvatar(true);
-    const profileDocRef = doc(firestore, "users", userId);
-    const profileDoc = await getDoc(profileDocRef);
-    console.log(profileDoc.data());
-    setProfile(profileDoc.data() as IProfile);
-    setLoadingAvatar(false);
-  };
 
   const onUpdateImg = async () => {
     try {
@@ -64,12 +59,6 @@ const Overview = ({ userId }: { userId: string }) => {
   };
 
   useEffect(() => {
-    (async () => {
-      await fetchProfile();
-    })();
-  }, [userId]);
-
-  useEffect(() => {
     setIsAvatarUpdated(false);
   }, [selectedFile]);
 
@@ -86,7 +75,7 @@ const Overview = ({ userId }: { userId: string }) => {
           mt="5px"
           position="relative"
           zIndex={0}
-          padding={"5px"}
+          padding="10px"
         >
           <Box
             position="absolute"
@@ -99,7 +88,7 @@ const Overview = ({ userId }: { userId: string }) => {
             borderRadius="5px 5px 0px 0px"
             zIndex={1}
           />
-          {loadingAvatar ? (
+          {isLoading ? (
             <Skeleton mt="4" height="80px" width="80px" borderRadius="full" />
           ) : (
             <>
@@ -108,15 +97,12 @@ const Overview = ({ userId }: { userId: string }) => {
                 alt="avatar"
                 width="80px"
                 height="80px"
-                onLoad={() => {
-                  setLoadingAvatar(false);
-                }}
                 borderRadius="full"
                 border={"1px solid gray"}
                 bg={"white"}
                 zIndex={2}
               />
-              {user?.uid === userId && (
+              {user?.uid === profile?.uid && (
                 <>
                   <Text
                     color="blue.500"
