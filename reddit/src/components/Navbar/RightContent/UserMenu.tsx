@@ -1,31 +1,28 @@
-import React from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
-  Icon,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../../firebase/clientApp";
-import { FaRedditSquare } from "react-icons/fa";
-import { VscAccount } from "react-icons/vsc";
-import { IoSparkles } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { MdOutlineLogin } from "react-icons/md";
-import { signOut } from "firebase/auth";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { AuthModalState } from "@/atoms/authModalAtom";
 import { CommunityState } from "@/atoms/communitiesAtom";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  Flex,
+  Icon,
+  Image,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
+import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
+import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { CgProfile } from "react-icons/cg";
+import { IoSparkles } from "react-icons/io5";
+import { MdOutlineLogin } from "react-icons/md";
+import { VscAccount } from "react-icons/vsc";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
+import { auth } from "../../../firebase/clientApp";
+import defaultAvatar from "../../../../public/images/default_user_avatar.png";
 
 type UserMynuProps = {};
 
@@ -52,7 +49,14 @@ const UserMenu: React.FC<UserMynuProps> = () => {
         >
           {user ? (
             <Flex align="center">
-              <Icon as={FaRedditSquare} fontSize="24" mr="1" color="gray.300" />
+              {/* <Icon as={FaRedditSquare} fontSize="48" mr="1" color="gray.300" /> */}
+              <Image
+                src={user?.photoURL || defaultAvatar.src}
+                height="35px"
+                width="35px"
+                borderRadius="full"
+                mr="2"
+              />
               <Flex
                 direction="column"
                 fontSize="8pt"
