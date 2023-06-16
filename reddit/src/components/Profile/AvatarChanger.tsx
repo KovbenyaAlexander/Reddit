@@ -14,7 +14,6 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import defaultAvatar from "../../../public/images/default_user_avatar.png";
-import PageContent from "../Layout/PageContent";
 
 interface IProfile {
   metadata: {

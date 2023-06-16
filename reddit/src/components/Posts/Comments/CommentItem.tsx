@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Timestamp } from "firebase/firestore";
-import { Box, Flex, Icon, Spinner, Stack, Text } from "@chakra-ui/react";
-import { FaReddit } from "react-icons/fa";
+import { Box, Flex, Icon, Image, Spinner, Stack, Text } from "@chakra-ui/react";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
   IoArrowDownCircleOutline,
   IoArrowUpCircleOutline,
 } from "react-icons/io5";
 import moment from "moment";
+import Link from "next/link";
+import { auth, firestore, storage } from "@/firebase/clientApp";
+import { useAuthState } from "react-firebase-hooks/auth";
+import defaultAvatar from "../../../../public/images/default_user_avatar.png";
+import { user } from "firebase-functions/v1/auth";
+import IProfile from "@/Types/Profile";
 
 export type Comment = {
   id: string;
@@ -33,17 +39,51 @@ const CommentItem: React.FC<CommentItemProps> = ({
   onDeleteComment,
   userId,
 }) => {
+  const [profile, setProfile] = useState<IProfile>();
+
+  const fetchProfile = async () => {
+    try {
+      const profileDocRef = doc(firestore, "users", comment.creatorId);
+      const profileDoc = await getDoc(profileDocRef);
+      setProfile(profileDoc.data() as IProfile);
+      console.log(profileDoc.data());
+    } catch (e) {
+      console.log(e);
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      await fetchProfile();
+    })();
+  }, [userId]);
+
   return (
     <>
       {/* @ts-ignore*/}
       <Flex>
         <Box mr="2">
-          <Icon as={FaReddit} fontSize="30" color="gray.300" />
+          {/* <Icon as={FaReddit} fontSize="30" color="gray.300" /> */}
+          <Image
+            src={profile?.photoURL || defaultAvatar.src}
+            height="40px"
+            width="40px"
+            borderRadius="full"
+          />
         </Box>
 
         <Stack spacing={1}>
           <Stack direction="row" align="center" fontSize="8pt">
-            <Text fontWeight="700">{comment.creatorDisplayText}</Text>
+            <Link href={`/r/profile/${comment.creatorId}`}>
+              <Text
+                fontWeight="700"
+                cursor="pointer"
+                _hover={{ textDecoration: "underline" }}
+              >
+                {comment.creatorDisplayText}
+              </Text>
+            </Link>
             <Text color="gray.600">
               {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
             </Text>
